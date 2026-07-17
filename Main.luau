@@ -2537,16 +2537,20 @@ Connections.KnobFarm = Services.RunService.Heartbeat:Connect(function()
 	if Toggles.KnobFarm.Value and Globals.KnobFarmStarted then
 		if not Globals.KnobFarmActive then
 			Globals.KnobFarmActive = true
-			if Functions.CheckCompatability({"replicatesignal"}) then
-				Abysall.Environment.replicatesignal(LocalPlayer.Kill)
-			else
-				RemotesFolder.Underwater:FireServer(true)
+			
+			-- Instant kill
+			if Humanoid then
+				Humanoid.Health = 0
 			end
+			
+			-- Wait for respawn
 			while task.wait() do
 				if LocalPlayer:GetAttribute("Alive") then
 					break
 				end
 			end
+			
+			-- Collect rewards
 			RemotesFolder.Statistics:FireServer()
 			task.wait(0.25)
 			Globals.KnobFarmActive = false
