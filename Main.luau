@@ -1,5 +1,4 @@
 local LoadStart = tick()
-Abysall.SavePath = "Doors/Game"
 
 local Library = Abysall.Interface.Library
 local SaveManager = Abysall.Interface.SaveManager
